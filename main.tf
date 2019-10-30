@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.11.6"
+  required_version = ">= 0.12.0"
 }
 
 module "consul_auto_join_instance_role" {
