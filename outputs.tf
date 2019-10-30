@@ -15,7 +15,8 @@ that key/value.
 Use the HTTP API to retrieve the Consul members, write a key/value,
 and read that key/value.
 ${!var.use_lb_cert ?
-"If you're making HTTP API requests to Consul from the Bastion host,
+<<-EOF
+If you're making HTTP API requests to Consul from the Bastion host,
 the below env var has been set for you.
   $ export CONSUL_ADDR=http://127.0.0.1:8500
   $ curl \\
@@ -27,9 +28,11 @@ the below env var has been set for you.
       $${CONSUL_ADDR}/v1/kv/api | jq '.' # Write a KV
   $ curl \\
       -X GET \\
-      $${CONSUL_ADDR}/v1/kv/api | jq '.' # Read a KV"
+      $${CONSUL_ADDR}/v1/kv/api | jq '.' # Read a KV
+EOF
 :
-"If you're making HTTPS API requests to Consul from the Bastion host,
+<<-EOF
+If you're making HTTPS API requests to Consul from the Bastion host,
 the below env vars have been set for you.
   $ export CONSUL_ADDR=https://127.0.0.1:8080
   $ export CONSUL_CACERT=/opt/consul/tls/consul-ca.crt
@@ -47,7 +50,8 @@ the below env vars have been set for you.
   $ curl \\
       -X GET \\
       -k --cacert $${CONSUL_CACERT} --cert $${CONSUL_CLIENT_CERT} --key $${CONSUL_CLIENT_KEY} \\
-      $${CONSUL_ADDR}/v1/kv/api | jq '.' # Read a KV"
+      $${CONSUL_ADDR}/v1/kv/api | jq '.' # Read a KV
+EOF
 }
 # ------------------------------------------------------------------------------
 # ${var.name} HashiStack Vault Dev Guide Setup
@@ -107,7 +111,8 @@ Use the CLI to write and read a generic secret.
 Use the HTTP API with Consul DNS to write and read a generic secret with
 Vault's KV secret engine.
 ${!var.use_lb_cert ?
-"If you're making HTTP API requests to Vault from the Bastion host,
+<<-EOF
+If you're making HTTP API requests to Vault from the Bastion host,
 the below env var has been set for you.
   $ export VAULT_ADDR=http://vault.service.vault:8200
   $ curl \\
@@ -117,9 +122,11 @@ the below env var has been set for you.
       $${VAULT_ADDR}/v1/secret/data/api | jq '.' # Write a KV secret
   $ curl \\
       -H \"X-Vault-Token: $${VAULT_TOKEN}\" \\
-      $${VAULT_ADDR}/v1/secret/data/api | jq '.' # Read a KV secret"
+      $${VAULT_ADDR}/v1/secret/data/api | jq '.' # Read a KV secret
+EOF
 :
-"If you're making HTTPS API requests to Vault from the Bastion host,
+<<-EOF
+If you're making HTTPS API requests to Vault from the Bastion host,
 the below env vars have been set for you.
   $ export VAULT_ADDR=https://vault.service.vault:8200
   $ export VAULT_CACERT=/opt/vault/tls/vault-ca.crt
@@ -134,7 +141,8 @@ the below env vars have been set for you.
   $ curl \\
       -H \"X-Vault-Token: $VAULT_TOKEN\" \\
       -k --cacert $${VAULT_CACERT} --cert $${VAULT_CLIENT_CERT} --key $${VAULT_CLIENT_KEY} \\
-      $${VAULT_ADDR}/v1/secret/data/api | jq '.' # Read a KV secret"
+      $${VAULT_ADDR}/v1/secret/data/api | jq '.' # Read a KV secret
+EOF
 }
 # ------------------------------------------------------------------------------
 # ${var.name} HashiStack Nomad
@@ -157,7 +165,8 @@ container and check it's status.
 Use the HTTP API to deploy a Redis Docker container.
   $ nomad run -output example.nomad > example.json # Convert job file to JSON
 ${!var.use_lb_cert ?
-"If you're making HTTP API requests to Nomad from the Bastion host,
+<<-EOF
+If you're making HTTP API requests to Nomad from the Bastion host,
 the below env var has been set for you.
   $ export NOMAD_ADDR=http://nomad.service.consul:4646
   $ curl \\
@@ -179,9 +188,11 @@ the below env var has been set for you.
       $${NOMAD_ADDR}/v1/job/example | jq '.' # Stop the example job
   $ curl \\
       -X GET \\
-      $${NOMAD_ADDR}/v1/jobs | jq '.' # Check that the job is stopped"
+      $${NOMAD_ADDR}/v1/jobs | jq '.' # Check that the job is stopped
+EOF
 :
-"If you're making HTTPS API requests to Nomad from the Bastion host,
+<<-EOF
+If you're making HTTPS API requests to Nomad from the Bastion host,
 the below env vars have been set for you.
   $ export NOMAD_ADDR=https://nomad.service.consul:4646
   $ export NOMAD_CACERT=/opt/nomad/tls/nomad-ca.crt
@@ -212,7 +223,8 @@ the below env vars have been set for you.
   $ curl \\
       -X GET \\
       -k --cacert $${NOMAD_CACERT} --cert $${NOMAD_CLIENT_CERT} --key $${NOMAD_CLIENT_KEY} \\
-      $${NOMAD_ADDR}/v1/jobs | jq '.' # Check that the job is stopped"
+      $${NOMAD_ADDR}/v1/jobs | jq '.' # Check that the job is stopped
+EOF
 }
 README
 }
